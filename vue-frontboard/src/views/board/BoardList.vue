@@ -79,27 +79,27 @@ export default {
   },
   methods: {
     fnGetList() {
-      this.list = [
-        {
-            "idx":1,
-            "title": "제목1",
-            "author": "작성자1",
-            "created_at": "작성일시1"
-        },
-        {
-            "idx":1,
-            "title": "제목1",
-            "author": "작성자1",
-            "created_at": "작성일시1"
-        },
-        {
-            "idx":1,
-            "title": "제목1",
-            "author": "작성자1",
-            "created_at": "작성일시1"
+      this.requestBody = {
+        keyword: this.keyword,
+        page: this.page,
+        size: this.size
+      }
+
+      this.$axios.get(this.$serverUrl + "/board/list", {
+        params: this.requestBody,
+        headers: {}
+      }).then((res) => {
+
+        this.list = res.data
+
+      }).catch((err) => {
+
+        if(err.message.indexOf('Network Error') > -1){
+          alert('네트워크가 원활하지 않습니다. \n 잠시 후 다시 시도해주세요.')
         }
-      ]
+        
+      })
     }
-    }
+  }
 }
 </script>
