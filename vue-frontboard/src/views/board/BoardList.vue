@@ -99,6 +99,24 @@ export default {
         }
         
       })
+    },
+    fnView(idx){
+      this.requestBody.idx = idx
+      this.$router.push({
+        path: './detail',
+        query: this.requestBody
+      })
+    },
+    fnWrite(){
+      this.$router.push({
+        path: './write'
+      })
+    },
+    fnPage(n){
+      if(this.page !== n){
+        this.page = n
+        this.fnGetList()
+      }
     }
   }
 }
