@@ -90,7 +90,11 @@ export default {
         headers: {}
       }).then((res) => {
 
-        this.list = res.data
+        if (res.data.result_code === "OK") {
+          this.list = res.data.data
+          this.paging = res.data.pagination
+          this.no = this.paging.total_list_cnt - ((this.paging.page - 1) * this.paging.page_size)
+        }
 
       }).catch((err) => {
 
